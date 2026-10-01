@@ -219,7 +219,7 @@ with tab1:
         )
         fig_ts.update_xaxes(showgrid=False, zeroline=False, color="#555")
         fig_ts.update_yaxes(showgrid=True, gridcolor="rgba(255,255,255,0.04)", zeroline=False, color="#555")
-        st.plotly_chart(fig_ts, use_container_width=True, key="ts_line")
+        st.plotly_chart(fig_ts, width="stretch", key="ts_line")
 
         col_a, col_b = st.columns(2, gap="large")
         with col_a:
@@ -240,7 +240,7 @@ with tab1:
             )
             fig_bub.update_xaxes(showgrid=False, zeroline=False, color="#555")
             fig_bub.update_yaxes(showgrid=True, gridcolor="rgba(255,255,255,0.04)", zeroline=False, color="#555")
-            st.plotly_chart(fig_bub, use_container_width=True, key="plat_bubble")
+            st.plotly_chart(fig_bub, width="stretch", key="plat_bubble")
 
         with col_b:
             st.markdown('<div class="section-label">Engagement Breakdown — Likes / Comments / Shares / Saves</div>', unsafe_allow_html=True)
@@ -253,7 +253,7 @@ with tab1:
                 hovertemplate="<b>%{label}</b><br>Total: %{value:,}<br>Share: %{percent}<extra></extra>",
             ))
             fig_donut.update_layout(title="Engagement Type Split", showlegend=False, **DARK_LAYOUT)
-            st.plotly_chart(fig_donut, use_container_width=True, key="eng_donut")
+            st.plotly_chart(fig_donut, width="stretch", key="eng_donut")
 
         # ── Campaign bar
         st.markdown('<div class="section-label">Campaign Type — Views & Engagement Rate</div>', unsafe_allow_html=True)
@@ -276,7 +276,7 @@ with tab1:
             )
             fig_camp.update_xaxes(showgrid=False, zeroline=False, color="#555")
             fig_camp.update_yaxes(showgrid=False, zeroline=False, color="#aaa")
-            st.plotly_chart(fig_camp, use_container_width=True, key="camp_bar")
+            st.plotly_chart(fig_camp, width="stretch", key="camp_bar")
 
 
 # ── TAB 2 ─────────────────────────────────────────────────────────
@@ -325,7 +325,7 @@ with tab2:
                                  ticktext=["Human Caption", "AI Caption"],
                                  tickvals=["No", "Yes"])
             fig_ai.update_yaxes(showgrid=True, gridcolor="rgba(255,255,255,0.04)", zeroline=False, color="#555")
-            st.plotly_chart(fig_ai, use_container_width=True, key="ai_bar")
+            st.plotly_chart(fig_ai, width="stretch", key="ai_bar")
 
         with col2:
             st.markdown('<div class="section-label">Post Format — Avg Engagement Rate</div>', unsafe_allow_html=True)
@@ -351,7 +351,7 @@ with tab2:
             )
             fig_pt.update_xaxes(showgrid=False, zeroline=False, color="#aaa")
             fig_pt.update_yaxes(showgrid=True, gridcolor="rgba(255,255,255,0.04)", zeroline=False, color="#555")
-            st.plotly_chart(fig_pt, use_container_width=True, key="pt_bar")
+            st.plotly_chart(fig_pt, width="stretch", key="pt_bar")
 
         st.markdown('<div class="section-label">AI Caption × Post Format — Engagement Rate Heatmap</div>', unsafe_allow_html=True)
         insight_box(f"<b>{top_pt}</b> format has the highest avg engagement rate. Combined with AI captions, this is the recommended format for the next campaign cycle.", kind="blue")
@@ -375,7 +375,7 @@ with tab2:
         )
         fig_heat.update_coloraxes(colorbar=dict(thickness=10, tickfont=dict(size=10,color="#888"),
                                                 title=dict(text="Avg ER %", font=dict(size=10,color="#888"))))
-        st.plotly_chart(fig_heat, use_container_width=True, key="heat_map")
+        st.plotly_chart(fig_heat, width="stretch", key="heat_map")
 
 
 # ── TAB 3 ─────────────────────────────────────────────────────────
@@ -423,7 +423,7 @@ with tab3:
         )
         fig_prod.update_xaxes(showgrid=False, zeroline=False, color="#555")
         fig_prod.update_yaxes(showgrid=False, zeroline=False, color="#aaa")
-        st.plotly_chart(fig_prod, use_container_width=True, key="prod_bar")
+        st.plotly_chart(fig_prod, width="stretch", key="prod_bar")
 
         # ── Product bubble
         st.markdown('<div class="section-label">Product — Views vs Engagement Rate (bubble size = post count)</div>', unsafe_allow_html=True)
@@ -448,7 +448,7 @@ with tab3:
         )
         fig_sc.update_xaxes(showgrid=False, zeroline=False, color="#555")
         fig_sc.update_yaxes(showgrid=True, gridcolor="rgba(255,255,255,0.04)", zeroline=False, color="#555")
-        st.plotly_chart(fig_sc, use_container_width=True, key="prod_bubble")
+        st.plotly_chart(fig_sc, width="stretch", key="prod_bubble")
 
 
 # ── TAB 4 ─────────────────────────────────────────────────────────
@@ -462,7 +462,7 @@ with tab4:
                         "Total_Engagements","Engagement_Rate","AI_Generated_Caption"]
         display_cols = [c for c in display_cols if c in fdf.columns]
         st.dataframe(fdf[display_cols].sort_values("Total_Engagements", ascending=False).reset_index(drop=True),
-                     use_container_width=True, hide_index=True)
+                     width="stretch", hide_index=True)
         csv_out = fdf[display_cols].to_csv(index=False).encode("utf-8")
         st.download_button("⬇ Download filtered data as CSV", data=csv_out,
                            file_name="kellermann_filtered.csv", mime="text/csv", key="dl_csv")
